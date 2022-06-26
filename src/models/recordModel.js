@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import mongooseDelete from "mongoose-delete";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const { Schema, model } = mongoose;
 
@@ -20,9 +20,6 @@ const recordSchema = new Schema(
   }
 );
 
-recordSchema.plugin(mongooseDelete, {
-  deletedAt: true,
-  overrideMethods: "all",
-});
+recordSchema.plugin(mongoosePaginate);
 const recordModel = model("record", recordSchema);
 export default recordModel;

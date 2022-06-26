@@ -11,14 +11,14 @@ const getAllMembers = async (filterParams) => {
 
 const getOneMember = async (memberId) => {
   try {
-    const member = await MemberModel.finOne(memberId);
+    const member = await MemberModel.findOne(memberId);
     return member;
   } catch (error) {
     throw error;
   }
 };
 
-const createNewMember = async (newMember) => {
+const createMember = async (newMember) => {
   try {
     const createdMember = await MemberModel.create(newMember);
     return createdMember;
@@ -52,10 +52,10 @@ const retoreOneMember = async (memberId) => {
   }
 };
 
-module.exports = {
+export default {
   getAllMembers,
   getOneMember,
-  createNewMember,
+  createMember,
   updateOneMember,
   deleteOneMember,
   retoreOneMember,

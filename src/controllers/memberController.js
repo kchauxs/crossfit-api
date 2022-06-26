@@ -14,7 +14,6 @@ const getAllMembers = async (req, res) => {
 
 const getOneMember = async (req, res) => {
   const { memberId } = req.params;
-
   try {
     const workout = await memberService.getOneMember(memberId);
     res.send({ status: "OK", data: workout });
@@ -25,9 +24,8 @@ const getOneMember = async (req, res) => {
   }
 };
 
-const createNewMember = async (req, res) => {
+const createMember = async (req, res) => {
   const { body } = req;
-
   const newMember = {
     name: body.name,
     gender: body.gender,
@@ -37,7 +35,7 @@ const createNewMember = async (req, res) => {
     role: body.role,
   };
   try {
-    const createdMember = await memberService.createNewMember(newMember);
+    const createdMember = await memberService.createMember(newMember);
     res.status(201).send({ status: "OK", data: createdMember });
   } catch (error) {
     res
@@ -51,7 +49,6 @@ const updateOneMember = async (req, res) => {
     body,
     params: { memberId },
   } = req;
-
   try {
     const updatedMember = await memberService.updateOneMember(memberId, body);
     res.send({ status: "OK", data: updatedMember });
@@ -64,7 +61,6 @@ const updateOneMember = async (req, res) => {
 
 const deleteOneMember = async (req, res) => {
   const { memberId } = req.params;
-
   try {
     await memberService.deleteOneMember(memberId);
     res.status(204).send({ status: "OK" });
@@ -77,7 +73,6 @@ const deleteOneMember = async (req, res) => {
 
 const retoreOneMember = async (req, res) => {
   const { memberId } = req.params;
-
   try {
     await memberService.retoreOneMember(memberId);
     res.status(204).send({ status: "OK" });
@@ -91,7 +86,7 @@ const retoreOneMember = async (req, res) => {
 export default {
   getAllMembers,
   getOneMember,
-  createNewMember,
+  createMember,
   updateOneMember,
   deleteOneMember,
   retoreOneMember,

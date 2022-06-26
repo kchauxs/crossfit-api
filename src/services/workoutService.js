@@ -52,7 +52,7 @@ const retoreOneWorkout = async (workoutId) => {
   }
 };
 
-module.exports = {
+export default {
   getAllWorkouts,
   getOneWorkout,
   createNewWorkout,

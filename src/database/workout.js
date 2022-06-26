@@ -3,9 +3,9 @@ const { connect } = mongoose;
 
 const DB_URL_LOCAL = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`;
 const dbUri =
-  process.env.MODE === "developer" ? process.env.DB_URL_TEST : DB_URL_LOCAL;
+  process.env.API_MODE === "developer" ? process.env.DB_URL_TEST : DB_URL_LOCAL;
 
-export const connectToAccessDB = async () => {
+export const connectToDB = async () => {
   connect(
     dbUri,
     {
@@ -16,9 +16,9 @@ export const connectToAccessDB = async () => {
     },
     (err, res) => {
       if (!err) {
-        console.log("Info: Mongo successfully conected: Ok");
+        console.log("Info: Mongo successfully conected: OK");
       } else {
-        console.log("Error: Mongo connection: Failed");
+        console.log("Error: Mongo connection: FAILED");
         throw err;
       }
     }

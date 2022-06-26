@@ -5,15 +5,17 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import xss from "xss-clean";
-import { json } from "body-parser";
+import bodyParser from "body-parser";
 
-import { routes } from "./v1/routes";
-import { swaggerDocs as V1SwaggerDocs } from "./v1/swagger";
+import { routes } from "./v1/routes/index.js";
+import { connectToDB } from "./database/workout.js";
+import { createAdmin } from "./utils/admin.js";
+// import { swaggerDocs as V1SwaggerDocs } from "./v1/swagger";
 
 const app = express();
 const PORT = process.env.API_PORT || 3000;
 
-app.use(json());
+app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(cookieParser());
@@ -22,7 +24,18 @@ app.use(xss());
 
 routes(app);
 
-app.listen(PORT, () => {
-  console.log(`Info: API is listening on port ${PORT}`);
-  V1SwaggerDocs(app, PORT);
-});
+const start = async () => {
+  try {
+    await connectToDB();
+    await createAdmin();
+
+    app.listen(PORT, () => {
+      console.log(`Info: API is listening on port ${PORT}`);
+      // V1SwaggerDocs(app, PORT);
+    });
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+};
+
+start();

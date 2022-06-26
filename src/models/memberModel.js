@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import mongooseDelete from "mongoose-delete";
-const { Schema, model } = mongoose;
 
+const { Schema, model } = mongoose;
+const adminRole = process.env.ADMIN_ROLE;
 const memberSchema = new Schema(
   {
     name: { type: String, required: [true] },
@@ -11,7 +12,7 @@ const memberSchema = new Schema(
     password: { type: String, required: [true] },
     role: {
       type: String,
-      enum: ["admin", "member"],
+      enum: [adminRole, "member"],
       default: "member",
     },
   },

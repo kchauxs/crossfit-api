@@ -23,6 +23,8 @@
     "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.0",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-paginate-v2": "^1.6.3",
     "morgan": "^1.10.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0",
