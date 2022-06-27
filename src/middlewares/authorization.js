@@ -1,16 +1,14 @@
 import { handleHttpError } from "../utils/helpers/handleError.js";
 
-const error = {
-  code: 401,
-  status: "FAILED",
-  data: { error: "Unauthorized to access this route" },
-};
-
-export const authorizePermissions = (...roles) => {
+export const authorization = (...roles) => {
   return (req, res, next) => {
     const { memberData } = req;
     if (!roles.includes(memberData.role)) {
-      handleHttpError(res, error);
+      handleHttpError(res, {
+        code: 401,
+        status: "FAILED",
+        data: { error: "Unauthorized to access this route" },
+      });
       return;
     }
     next();

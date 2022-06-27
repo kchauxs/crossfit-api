@@ -11,9 +11,9 @@ export const login = async (req, res) => {
   try {
     const member = await memberModel.getOneMember({ email: body.email });
     if (!member) {
-      res.status(401).send({
+      res.status(404).send({
         status: "FAILED",
-        data: { error: "Invalid Credentials" },
+        data: { error: "Unregistered member" },
       });
       return;
     }

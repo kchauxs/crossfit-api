@@ -1,4 +1,6 @@
 import memberService from "../services/memberService.js";
+import { handleHttpError } from "../utils/helpers/handleError.js";
+import { encryptPassword } from "../utils/helpers/handlePassword.js";
 
 const getAllMembers = async (req, res) => {
   const query = req.query;
@@ -6,41 +8,46 @@ const getAllMembers = async (req, res) => {
     const allMembers = await memberService.getAllMembers({ ...query });
     res.send({ status: "OK", data: allMembers });
   } catch (error) {
-    res
-      .status(error?.status || 500)
-      .send({ status: "FAILED", data: { error: error?.message || error } });
+    handleHttpError(res, error);
+    // res
+    //   .status(error?.status || 500)
+    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
 const getOneMember = async (req, res) => {
   const { memberId } = req.params;
   try {
-    const workout = await memberService.getOneMember(memberId);
-    res.send({ status: "OK", data: workout });
+    const member = await memberService.getOneMember({ _id: memberId });
+    res.send({ status: "OK", data: member });
   } catch (error) {
-    res
-      .status(error?.status || 500)
-      .send({ status: "FAILED", data: { error: error?.message || error } });
+    handleHttpError(res, error);
+    // res
+    //   .status(error?.status || 500)
+    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
 const createMember = async (req, res) => {
   const { body } = req;
+  const passwordEncrypt = await encryptPassword(body.password);
   const newMember = {
     name: body.name,
     gender: body.gender,
     dateOfBirth: body.dateOfBirth,
     email: body.email,
-    password: body.password,
+    password: passwordEncrypt,
     role: body.role,
   };
   try {
     const createdMember = await memberService.createMember(newMember);
+    createdMember.set("password", undefined, { strict: false });
     res.status(201).send({ status: "OK", data: createdMember });
   } catch (error) {
-    res
-      .status(error?.status || 500)
-      .send({ status: "FAILED", data: { error: error?.message || error } });
+    handleHttpError(res, error);
+    // res
+    //   .status(error?.status || 500)
+    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -53,33 +60,36 @@ const updateOneMember = async (req, res) => {
     const updatedMember = await memberService.updateOneMember(memberId, body);
     res.send({ status: "OK", data: updatedMember });
   } catch (error) {
-    res
-      .status(error?.status || 500)
-      .send({ status: "FAILED", data: { error: error?.message || error } });
+    handleHttpError(res, error);
+    // res
+    //   .status(error?.status || 500)
+    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
 const deleteOneMember = async (req, res) => {
   const { memberId } = req.params;
   try {
-    await memberService.deleteOneMember(memberId);
+    await memberService.deleteOneMember({ _id: memberId });
     res.status(204).send({ status: "OK" });
   } catch (error) {
-    res
-      .status(error?.status || 500)
-      .send({ status: "FAILED", data: { error: error?.message || error } });
+    handleHttpError(res, error);
+    // res
+    //   .status(error?.status || 500)
+    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
 const retoreOneMember = async (req, res) => {
   const { memberId } = req.params;
   try {
-    await memberService.retoreOneMember(memberId);
+    await memberService.retoreOneMember({ _id: memberId });
     res.status(204).send({ status: "OK" });
   } catch (error) {
-    res
-      .status(error?.status || 500)
-      .send({ status: "FAILED", data: { error: error?.message || error } });
+    handleHttpError(res, error);
+    // res
+    //   .status(error?.status || 500)
+    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 

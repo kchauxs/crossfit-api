@@ -2,16 +2,16 @@ import MemberModel from "../models/memberModel.js";
 
 const getAllMembers = async (filterParams) => {
   try {
-    const allMembers = await MemberModel.find(filterParams);
+    const allMembers = await MemberModel.find(filterParams).select("-password");
     return allMembers;
   } catch (error) {
     throw error;
   }
 };
 
-const getOneMember = async (memberId) => {
+const getOneMember = async (filterParams) => {
   try {
-    const member = await MemberModel.findOne(memberId);
+    const member = await MemberModel.findOne(filterParams).select("-password");
     return member;
   } catch (error) {
     throw error;
@@ -46,7 +46,7 @@ const deleteOneMember = async (memberId) => {
 
 const retoreOneMember = async (memberId) => {
   try {
-    await MemberModel.retore(memberId);
+    await MemberModel.restore(memberId);
   } catch (error) {
     throw error;
   }

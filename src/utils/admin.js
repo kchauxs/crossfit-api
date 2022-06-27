@@ -4,7 +4,7 @@ import { encryptPassword } from "./helpers/handlePassword.js";
 export const createAdmin = async () => {
   try {
     const userAdmin = await memberService.getOneMember({
-      role: process.env.ADMIN_ROLE,
+      role: "admin",
     });
     if (userAdmin) return;
     const adminPassword = await encryptPassword(process.env.ADMIN_PASSWORD);
@@ -14,7 +14,7 @@ export const createAdmin = async () => {
       dateOfBirth: process.env.ADMIN_DATE_OF_BIRTH,
       email: process.env.ADMIN_EMAIL,
       password: adminPassword,
-      role: process.env.ADMIN_ROLE,
+      role: "admin",
     });
     console.log("Info: User Admin create: OK");
   } catch (error) {
