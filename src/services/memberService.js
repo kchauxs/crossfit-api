@@ -27,9 +27,9 @@ const createMember = async (newMember) => {
   }
 };
 
-const updateOneMember = async (memberId, changes) => {
+const updateOneMember = async (filterParams, changes) => {
   try {
-    const updatedMember = await MemberModel.updateOne(memberId, changes);
+    const updatedMember = await MemberModel.updateOne(filterParams, changes);
     return updatedMember;
   } catch (error) {
     throw error;

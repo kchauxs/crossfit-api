@@ -13,10 +13,11 @@ const validateCreateMember = [
 ];
 
 const validateUpdateMember = [
+  check("memberId").exists().notEmpty(),
   check("name").exists().notEmpty().isString().trim(),
   check("gender").exists().notEmpty().isString().trim(),
-  check("dateOfBirth").exists().notEmpty().isDate(),
-  check("email").exists().notEmpty().isEmail(),
+  check("dateOfBirth").exists().notEmpty().isString(),
+  // check("email").exists().notEmpty().isEmail(),
   (req, res, next) => {
     return validateResults(req, res, next);
   },

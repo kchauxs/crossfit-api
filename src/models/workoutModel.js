@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 
 const workoutSchema = new Schema(
   {
-    name: { type: String, required: [true] },
+    name: { type: String, unique: true, required: [true] },
     mode: { type: String, required: [true] },
     equipment: { type: [String], required: [true] },
     exercises: { type: [String], required: [true] },

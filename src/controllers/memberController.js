@@ -3,8 +3,8 @@ import { handleHttpError } from "../utils/helpers/handleError.js";
 import { encryptPassword } from "../utils/helpers/handlePassword.js";
 
 const getAllMembers = async (req, res) => {
-  const query = req.query;
   try {
+    const query = req.query;
     const allMembers = await memberService.getAllMembers({ ...query });
     res.send({ status: "OK", data: allMembers });
   } catch (error) {
@@ -16,8 +16,8 @@ const getAllMembers = async (req, res) => {
 };
 
 const getOneMember = async (req, res) => {
-  const { memberId } = req.params;
   try {
+    const { memberId } = req.params;
     const member = await memberService.getOneMember({ _id: memberId });
     res.send({ status: "OK", data: member });
   } catch (error) {
@@ -29,17 +29,18 @@ const getOneMember = async (req, res) => {
 };
 
 const createMember = async (req, res) => {
-  const { body } = req;
-  const passwordEncrypt = await encryptPassword(body.password);
-  const newMember = {
-    name: body.name,
-    gender: body.gender,
-    dateOfBirth: body.dateOfBirth,
-    email: body.email,
-    password: passwordEncrypt,
-    role: body.role,
-  };
   try {
+    const { body } = req;
+    const passwordEncrypt = await encryptPassword(body.password);
+    const newMember = {
+      name: body.name,
+      gender: body.gender,
+      dateOfBirth: body.dateOfBirth,
+      email: body.email,
+      password: passwordEncrypt,
+      role: body.role,
+    };
+
     const createdMember = await memberService.createMember(newMember);
     createdMember.set("password", undefined, { strict: false });
     res.status(201).send({ status: "OK", data: createdMember });
@@ -52,12 +53,15 @@ const createMember = async (req, res) => {
 };
 
 const updateOneMember = async (req, res) => {
-  const {
-    body,
-    params: { memberId },
-  } = req;
   try {
-    const updatedMember = await memberService.updateOneMember(memberId, body);
+    const {
+      body,
+      params: { memberId },
+    } = req;
+    const updatedMember = await memberService.updateOneMember(
+      { _id: memberId },
+      body
+    );
     res.send({ status: "OK", data: updatedMember });
   } catch (error) {
     handleHttpError(res, error);
@@ -68,8 +72,8 @@ const updateOneMember = async (req, res) => {
 };
 
 const deleteOneMember = async (req, res) => {
-  const { memberId } = req.params;
   try {
+    const { memberId } = req.params;
     await memberService.deleteOneMember({ _id: memberId });
     res.status(204).send({ status: "OK" });
   } catch (error) {
@@ -81,8 +85,8 @@ const deleteOneMember = async (req, res) => {
 };
 
 const retoreOneMember = async (req, res) => {
-  const { memberId } = req.params;
   try {
+    const { memberId } = req.params;
     await memberService.retoreOneMember({ _id: memberId });
     res.status(204).send({ status: "OK" });
   } catch (error) {

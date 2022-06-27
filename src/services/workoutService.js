@@ -9,9 +9,9 @@ const getAllWorkouts = async (filterParams) => {
   }
 };
 
-const getOneWorkout = async (workoutId) => {
+const getOneWorkout = async (filterParams) => {
   try {
-    const workout = await WorkoutModel.finOne(workoutId);
+    const workout = await WorkoutModel.findOne(filterParams);
     return workout;
   } catch (error) {
     throw error;
@@ -27,26 +27,26 @@ const createNewWorkout = async (newWorkout) => {
   }
 };
 
-const updateOneWorkout = async (workoutId, changes) => {
+const updateOneWorkout = async (filterParams, changes) => {
   try {
-    const updatedWorkout = await WorkoutModel.updateOne(workoutId, changes);
+    const updatedWorkout = await WorkoutModel.updateOne(filterParams, changes);
     return updatedWorkout;
   } catch (error) {
     throw error;
   }
 };
 
-const deleteOneWorkout = async (workoutId) => {
+const deleteOneWorkout = async (filterParams) => {
   try {
-    await WorkoutModel.delete(workoutId);
+    await WorkoutModel.delete(filterParams);
   } catch (error) {
     throw error;
   }
 };
 
-const retoreOneWorkout = async (workoutId) => {
+const retoreOneWorkout = async (filterParams) => {
   try {
-    await WorkoutModel.retore(workoutId);
+    await WorkoutModel.restore(filterParams);
   } catch (error) {
     throw error;
   }
