@@ -31,7 +31,7 @@ const validateGetOneMember = [
 ];
 
 const validateRestoreMember = [
-  check("memberId").exists().notEmpty(),
+  check("email").exists().notEmpty().isEmail(),
   (req, res, next) => {
     return validateResults(req, res, next);
   },

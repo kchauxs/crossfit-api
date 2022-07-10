@@ -53,9 +53,6 @@ const updateOneWorkout = async (req, res) => {
       body,
       params: { workoutId },
     } = req;
-
-    console.log(body, workoutId);
-
     const updatedWorkout = await workoutService.updateOneWorkout(
       { _id: workoutId },
       body

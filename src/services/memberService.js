@@ -11,7 +11,7 @@ const getAllMembers = async (filterParams) => {
 
 const getOneMember = async (filterParams) => {
   try {
-    const member = await MemberModel.findOne(filterParams).select("-password");
+    const member = await MemberModel.findOne(filterParams);
     return member;
   } catch (error) {
     throw error;
@@ -46,7 +46,8 @@ const deleteOneMember = async (memberId) => {
 
 const retoreOneMember = async (memberId) => {
   try {
-    await MemberModel.restore(memberId);
+    const restoreMember = await MemberModel.restore(memberId);
+    return restoreMember;
   } catch (error) {
     throw error;
   }

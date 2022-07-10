@@ -5,13 +5,11 @@ import { encryptPassword } from "../utils/helpers/handlePassword.js";
 const getAllMembers = async (req, res) => {
   try {
     const query = req.query;
-    const allMembers = await memberService.getAllMembers({ ...query });
+    query.role = "member";
+    const allMembers = await memberService.getAllMembers(query);
     res.send({ status: "OK", data: allMembers });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -19,12 +17,17 @@ const getOneMember = async (req, res) => {
   try {
     const { memberId } = req.params;
     const member = await memberService.getOneMember({ _id: memberId });
+    if (!member) {
+      res.status(404).send({
+        status: "FAILED",
+        data: { error: "Member not found" },
+      });
+      return;
+    }
+    member.set("password", undefined, { strict: false });
     res.send({ status: "OK", data: member });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -46,9 +49,6 @@ const createMember = async (req, res) => {
     res.status(201).send({ status: "OK", data: createdMember });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -58,16 +58,10 @@ const updateOneMember = async (req, res) => {
       body,
       params: { memberId },
     } = req;
-    const updatedMember = await memberService.updateOneMember(
-      { _id: memberId },
-      body
-    );
-    res.send({ status: "OK", data: updatedMember });
+    await memberService.updateOneMember({ _id: memberId }, body);
+    res.status(204).send({ status: "OK" });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -78,22 +72,20 @@ const deleteOneMember = async (req, res) => {
     res.status(204).send({ status: "OK" });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
 const retoreOneMember = async (req, res) => {
   try {
-    const { memberId } = req.params;
-    await memberService.retoreOneMember({ _id: memberId });
-    res.status(204).send({ status: "OK" });
+    const { email } = req.params;
+    const { modifiedCount } = await memberService.retoreOneMember({ email });
+    if (modifiedCount) return res.status(204).send({ status: "OK" });
+    res.status(404).send({
+      status: "FAILED",
+      data: { error: "Member not found" },
+    });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 

@@ -32,7 +32,7 @@ router.patch(
   memberController.updateOneMember
 );
 router.patch(
-  "/rostore/:memberId",
+  "/rostore/:email",
   authentication,
   authorization("admin"),
   memberValidator.validateRestoreMember,
