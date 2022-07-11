@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 const { connect } = mongoose;
 
-const DB_URL_LOCAL = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DATABASE}`;
 const dbUri =
-  process.env.NODE_ENV === "developer" ? process.env.DB_URL_TEST : DB_URL_LOCAL;
+  process.env.NODE_ENV === "developer"
+    ? process.env.MONGODB_URI_TEST
+    : process.env.MONGODB_URI;
 
 export const connectToDB = async () => {
   connect(

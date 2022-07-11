@@ -5,8 +5,8 @@ const { Schema, model } = mongoose;
 const memberSchema = new Schema(
   {
     name: { type: String, required: [true] },
-    gender: { type: String, required: [true] },
-    dateOfBirth: { type: String, required: [true] },
+    gender: { type: String, required: [false] },
+    dateOfBirth: { type: String, required: [false] },
     email: { type: String, unique: true, required: [true] },
     password: { type: String, required: [true] },
     role: {
