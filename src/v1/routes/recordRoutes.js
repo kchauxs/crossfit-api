@@ -38,34 +38,3 @@ router.delete(
 );
 
 export default router;
-
-// router.get(
-//   "/:memberId",
-//   authentication,
-//   authorization("admin"),
-//   memberValidator.validateGetOneMember,
-//   memberController.getOneMember
-// );
-
-// router.patch(
-//   "/:memberId",
-//   authentication,
-//   authorization("admin", "member"),
-//   memberValidator.validateUpdateMember,
-//   memberController.updateOneMember
-// );
-// router.patch(
-//   "/rostore/:email",
-//   authentication,
-//   authorization("admin"),
-//   memberValidator.validateRestoreMember,
-//   memberController.retoreOneMember
-// );
-// router.delete(
-//   "/:memberId",
-//   authentication,
-//   authorization("admin"),
-//   memberValidator.validateDeleteMember,
-//   memberController.deleteOneMember
-// );
-// router.get("/:memberId/workouts", recordController.getRecordForWorkout);

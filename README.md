@@ -17,8 +17,8 @@ This api is a personal exercise where users (who will be gym owners) can create 
 
 - `JWT_SECURE`, hashes for the token
 - `JWT_SECURE_REFRESH`, hash to refresh the token
-- `JWT_LIFETIME`, tiempo de vida del token
-- `JWT_REFRESH_LIFETIME`, the password of the admin user
+- `JWT_LIFETIME`, token lifetime
+- `JWT_REFRESH_LIFETIME`, refresh token lifetime
 
 ## Installation
 
@@ -44,8 +44,8 @@ npm run dev
 docker-compose up
 ```
 
-Improvements for the Future
+## Improvements for the Future
 
-- [] 🔹 Documentation on Swagger
-- [] 🔹 Docker Compose
-- [] 🔹 Unit tests
+- Documentation on Swagger
+- Docker Compose
+- Unit tests

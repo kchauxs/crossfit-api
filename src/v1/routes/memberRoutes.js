@@ -45,5 +45,5 @@ router.delete(
   memberValidator.validateDeleteMember,
   memberController.deleteOneMember
 );
-// router.get("/:memberId/workouts", recordController.getRecordForWorkout);
+
 export default router;

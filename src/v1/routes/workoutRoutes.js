@@ -34,9 +34,7 @@ const cache = apicache.middleware;
  *                   example: OK
  *                 data:
  *                   type: array
- *                   items:
- *                     $ref: "#/components/schemas/Workout"
- *       5XX:
+ *       4XX:
  *         description: FAILED
  *         content:
  *           application/json:
@@ -53,7 +51,7 @@ const cache = apicache.middleware;
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/", /* cache("1 minutes"), */ workoutController.getAllWorkouts);
+router.get("/", cache("1 minutes"), workoutController.getAllWorkouts);
 router.get(
   "/:workoutId",
   workoutValidator.validateGetOneWorkout,
