@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import mongooseDelete from "mongoose-delete";
+import mongoosePaginate from "mongoose-paginate-v2";
 const { Schema, model } = mongoose;
 
 const workoutSchema = new Schema(
@@ -20,6 +21,7 @@ const workoutSchema = new Schema(
   }
 );
 
+workoutSchema.plugin(mongoosePaginate);
 workoutSchema.plugin(mongooseDelete, {
   deletedAt: true,
   overrideMethods: "all",

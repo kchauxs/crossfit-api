@@ -1,8 +1,8 @@
 import WorkoutModel from "../models/workoutModel.js";
 
-const getAllWorkouts = async (filterParams) => {
+const getAllWorkouts = async (filterParam, options) => {
   try {
-    const allWorkouts = await WorkoutModel.find(filterParams);
+    const allWorkouts = await WorkoutModel.paginate(filterParam, options);
     return allWorkouts;
   } catch (error) {
     throw error;

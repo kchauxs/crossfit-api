@@ -4,13 +4,16 @@ import { handleHttpError } from "../utils/helpers/handleError.js";
 const getAllWorkouts = async (req, res) => {
   try {
     const query = req.query;
-    const allWorkouts = await workoutService.getAllWorkouts({ ...query });
+    const { limit = 20, page = 1, sort = 1 } = req.query;
+    const options = {
+      limit: limit,
+      page: page,
+      sort: { createdAt: sort },
+    };
+    const allWorkouts = await workoutService.getAllWorkouts(query, options);
     res.send({ status: "OK", data: allWorkouts });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -21,9 +24,6 @@ const getOneWorkout = async (req, res) => {
     res.send({ status: "OK", data: workout });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -41,9 +41,6 @@ const createNewWorkout = async (req, res) => {
     res.status(201).send({ status: "OK", data: createdWorkout });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -60,9 +57,6 @@ const updateOneWorkout = async (req, res) => {
     res.send({ status: "OK", data: updatedWorkout });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
@@ -75,9 +69,6 @@ const deleteOneWorkout = async (req, res) => {
     res.status(204).send({ status: "OK" });
   } catch (error) {
     handleHttpError(res, error);
-    // res
-    //   .status(error?.status || 500)
-    //   .send({ status: "FAILED", data: { error: error?.message || error } });
   }
 };
 
