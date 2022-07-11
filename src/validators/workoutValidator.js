@@ -37,6 +37,12 @@ const validateGetOneWorkout = [
     return validateResults(req, res, next);
   },
 ];
+const validateGetRecordsForWorkout = [
+  check("workoutId").exists().notEmpty().isMongoId(),
+  (req, res, next) => {
+    return validateResults(req, res, next);
+  },
+];
 
 const validateRestoreWorkout = [
   check("nameWorkout").exists().notEmpty().isString(),
@@ -56,6 +62,7 @@ export default {
   validateCreateWorkout,
   validateUpdateWorkout,
   validateGetOneWorkout,
+  validateGetRecordsForWorkout,
   validateRestoreWorkout,
   validateDeleteWorkout,
 };

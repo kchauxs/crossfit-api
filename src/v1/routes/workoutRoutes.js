@@ -59,7 +59,11 @@ router.get(
   workoutValidator.validateGetOneWorkout,
   workoutController.getOneWorkout
 );
-router.get("/:workoutId/records", recordController.getRecordForWorkout);
+router.get(
+  "/:workoutId/records",
+  workoutValidator.validateGetRecordsForWorkout,
+  recordController.getRecordsForWorkout
+);
 router.post(
   "/",
   authentication,
