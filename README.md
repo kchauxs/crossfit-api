@@ -1,8 +1,15 @@
-# CrossFit-Api 🤸‍♂️ ⚡
+# CrossFit Api 🤸‍♂️ ⚡
 
 REST API for a CrossFit Training App
 
-This api is a personal exercise where users (who will be gym owners) can create training plans and maintain their own workouts within a single application. In addition to that, they can also add some important training tips for each workout.
+This API is a personal workout where users (who will own a gym) can register members, workout plans and maintain their own workouts within one app. In addition to that, they can also add some important training tips for each workout.
+
+## Feactures
+
+MongoDB:
+
+- Soft deletion of documents
+- Document pagination
 
 ## Environment Variables
 
@@ -22,25 +29,25 @@ This api is a personal exercise where users (who will be gym owners) can create 
 
 ## Installation
 
-```
+```bash
 npm install
 ```
 
 ## Running the app
 
-```
+```bash
 npm run start
 ```
 
 Development:
 
-```
+```bash
 npm run dev
 ```
 
 ## Installation with docker-compose
 
-```
+```bash
 docker-compose up
 ```
 
