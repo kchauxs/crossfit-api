@@ -31,7 +31,7 @@ const start = async () => {
 
     app.listen(PORT, () => {
       console.log(`Info: API is listening on port ${PORT}`);
-      swaggerDocs(app, PORT);
+      // swaggerDocs(app, PORT);
     });
   } catch (error) {
     console.log("Error: ", error);
