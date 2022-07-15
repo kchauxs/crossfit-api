@@ -13,7 +13,7 @@ import { createAdmin } from "./utils/admin.js";
 import { swaggerDocs } from "./v1/swagger.js";
 
 const app = express();
-const PORT = process.env.API_PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
