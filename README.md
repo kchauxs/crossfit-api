@@ -7,7 +7,6 @@ This API is a personal workout where users (who will own a gym) can register mem
 ## Feactures
 
 MongoDB:
-
 - Soft deletion of documents
 - Document pagination
 
@@ -23,7 +22,7 @@ MongoDB:
 - `JWT_SECURE`, hashes for the token
 - `JWT_SECURE_REFRESH`, hash to refresh the token
 
-## Install
+## Install ⚡
 
 1. Clone project
 2. `npm install`
@@ -32,7 +31,7 @@ MongoDB:
 5. Running the app `npm run start` or `npm run start` in development mode
 
 
-## Installation with docker-compose
+## Install with docker-compose 🐳
 
 ```bash
 docker compose -f "docker-compose.yml" up -d
