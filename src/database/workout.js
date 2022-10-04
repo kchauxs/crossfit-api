@@ -15,7 +15,7 @@ export const connectToDB = async () => {
       useNewUrlParser: true,
       authSource: "admin",
     },
-    (err, res) => {
+    (err, _) => {
       if (!err) {
         console.log("Info: Mongo successfully conected: OK");
       } else {

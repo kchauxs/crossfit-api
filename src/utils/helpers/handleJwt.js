@@ -1,15 +1,17 @@
 import jwt from "jsonwebtoken";
 
 export const generateToken = (member) => {
-  const expiresIn = Number(process.env.JWT_LIFETIME);
+  const expiresIn = "15m";
   const token = jwt.sign(member, process.env.JWT_SECURE, { expiresIn });
   return { token, expiresIn };
 };
 
 export const generateRefreshToken = (member, res) => {
   try {
-    const expiresIn = Number(process.env.JWT_REFRESH_LIFETIME);
-    const refreshToken = jwt.sign(member, process.env.JWT_SECURE_REFRESH, { expiresIn });
+    const expiresIn = "7d";
+    const refreshToken = jwt.sign(member, process.env.JWT_SECURE_REFRESH, {
+      expiresIn,
+    });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,

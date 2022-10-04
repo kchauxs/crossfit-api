@@ -10,10 +10,9 @@ import bodyParser from "body-parser";
 import { routes } from "./v1/routes/index.js";
 import { connectToDB } from "./database/workout.js";
 import { createAdmin } from "./utils/admin.js";
-import { swaggerDocs } from "./v1/swagger.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.API_PORT || 4044;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -28,10 +27,8 @@ const start = async () => {
   try {
     await connectToDB();
     await createAdmin();
-
     app.listen(PORT, () => {
       console.log(`Info: API is listening on port ${PORT}`);
-      // swaggerDocs(app, PORT);
     });
   } catch (error) {
     console.log("Error: ", error);

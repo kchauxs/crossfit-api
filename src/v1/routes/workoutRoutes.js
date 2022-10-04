@@ -9,48 +9,6 @@ import recordController from "../../controllers/recordController.js";
 const router = Router();
 const cache = apicache.middleware;
 
-/**
- * @openapi
- * /api/v1/workouts:
- *   get:
- *     tags:
- *       - Workouts
- *     parameters:
- *       - in: query
- *         name: mode
- *         schema:
- *           type: string
- *         description: The mode of a workout
- *     responses:
- *       200:
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: OK
- *                 data:
- *                   type: array
- *       4XX:
- *         description: FAILED
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: FAILED
- *                 data:
- *                   type: object
- *                   properties:
- *                     error:
- *                       type: string
- *                       example: "Some error message"
- */
 router.get("/", cache("1 minutes"), workoutController.getAllWorkouts);
 router.get(
   "/:workoutId",
