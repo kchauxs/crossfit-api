@@ -9,6 +9,7 @@ export const generateToken = (member) => {
 export const generateRefreshToken = (member, res) => {
   try {
     const expiresIn = "7d";
+    const expires = new Date(Date.now() + 7 * 60 * 60 * 1000);
     const refreshToken = jwt.sign(member, process.env.JWT_SECURE_REFRESH, {
       expiresIn,
     });
@@ -16,7 +17,7 @@ export const generateRefreshToken = (member, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: !(process.env.NODE_ENV === "developer"),
-      expires: new Date(Date.now() + expiresIn * 1000),
+      expires: expires,
     });
   } catch (error) {
     throw error;

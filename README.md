@@ -7,20 +7,19 @@ This API is a personal workout where users (who will own a gym) can register mem
 ## Feactures
 
 MongoDB:
+
 - Soft deletion of documents
 - Document pagination
+- Document seed
 
 ## Environment Variables
 
-- `NODE_ENV`, to indicate the execution of the api in development or production mode. By default is `developer`
 - `API_PORT` the http server port. By default is `4044`
-- `MONGODB_URI`, the mongodb database uri
-- `MONGODB_URI_TEST`, the mongodb test database test uri
-- `ADMIN_NAME`, the admin username
-- `ADMIN_EMAIL`, the admin user's email
-- `ADMIN_PASSWORD`, the password of the admin user
-- `JWT_SECURE`, hashes for the token
 - `JWT_SECURE_REFRESH`, hash to refresh the token
+- `JWT_SECURE`, hashes for the token
+- `MONGODB_URI_TEST`, the mongodb test database test uri
+- `MONGODB_URI`, the mongodb database uri
+- `NODE_ENV`, to indicate the execution of the api in development or production mode. By default is `developer`
 
 ## Install ⚡
 
@@ -30,9 +29,19 @@ MongoDB:
 4. Change environment variables (optional)
 5. Running the app `npm run start` or `npm run start` in development mode
 
+## Install with docker-compose 🐳 ✅
 
-## Install with docker-compose 🐳
+1. Clone project
+2. Clone the `.env.template` file and rename it to `.env`
+3. Change environment variables (optional)
+4. Run the following command:
 
 ```bash
 docker compose -f "docker-compose.yml" up -d
+```
+
+## Run Seed 🥜
+
+```bash
+curl -X 'GET' 'http://localhost:4044/api/v1/seed' -H 'accept: */*'
 ```
