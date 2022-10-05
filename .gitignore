@@ -1,4 +1,8 @@
+# compiled output
 node_modules
+# enviroment
 .env
+# Files
 *.csv
+# database
 mongodata

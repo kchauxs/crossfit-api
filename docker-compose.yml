@@ -3,6 +3,7 @@ version: "3.8"
 services:
   mongo:
     image: mongo
+    container_name: mongo-crossfit
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: rootdb
@@ -14,6 +15,9 @@ services:
 
   node:
     build: .
+    container_name: node-crossfit
     restart: always
     ports:
       - 4044:4044
+    depends_on:
+      - mongo
