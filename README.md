@@ -12,6 +12,13 @@ MongoDB:
 - Document pagination
 - Document seed
 
+App:
+
+- Authentication
+- Authorization
+- Refresh token by cookie
+- Download data in CSV
+
 ## Environment Variables
 
 - `API_PORT` the http server port. By default is `4044`
